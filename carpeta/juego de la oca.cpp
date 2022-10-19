@@ -1,5 +1,6 @@
 #include <iostream>
 #include <ctime>
+#include <iomanip>
 using namespace std;
 
 //funciones declaradas
@@ -26,7 +27,9 @@ int siguienteOca(int casilla);
 //int siguienteLaberinto();
 //int siguienteMuerte();
 
-
+//Funciones visuales
+void square();
+string center(int width, string s);
 
 int main() {
     //defino la seed del número aleatorio
@@ -195,4 +198,38 @@ bool esOca(int casilla){
         return true;
     } else
         return false;
+}
+
+string center(int width, string s){
+    string out;
+
+    //Obtenemos la longitud de la cadena deseada
+    int length = s.length();
+
+    /* Calculamos la longitud de los espacios que debe haber a cada lado de la cadena
+     * obteniendo primero la diferencia entre la longitud deseada y la de la propia cadena,
+     * y obteniendo la mitad, siendo el restante la diferencia entre el espacio izquierdo
+     */
+    int difference = width - length;
+    int spL = difference/2;
+    int spR = difference - spL;
+
+    //Si la longitud deseada es menor que la de la propia cadena, retornamos la propia cadena
+    if(width < length) out = s;
+    else out = string(spL, ' ') + s + string(spR, ' ');
+
+    return out;
+}
+
+void square(){
+
+    cout << "//-----------------------------\\\\" << endl;
+
+    for(int i = 0; i<5; i++) {
+        if(i == 2) cout << left << "|" << center(31, "") << right << "|" << endl;
+        else cout << left << "|" << setw(32) << right << "|" << endl;
+    }
+
+    cout << "\\\\-----------------------------//" << endl;
+
 }
