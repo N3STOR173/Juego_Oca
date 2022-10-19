@@ -195,5 +195,4 @@ bool esOca(int casilla){
         return true;
     } else
         return false;
-
 }
