@@ -197,7 +197,3 @@ bool esOca(int casilla){
         return false;
 
 }
-
-/*
- * Texto
- */
