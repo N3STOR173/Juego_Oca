@@ -159,7 +159,7 @@ int tirarDadoManual(){
 int efectoPosicion(int casillaActual){
     if (esOca (casillaActual)){
         cout << "De Oca en Oca y tiro porque me toca\n";
-        cout << "Pasas a la casilla: " << siguienteOca(casillaActual) << "\n Y vuelves a tirar";
+        cout << "Pasas a la casilla: " << siguienteOca(casillaActual) << "\nY vuelves a tirar\n";
         return siguienteOca(casillaActual);
 
     }
@@ -169,14 +169,9 @@ int efectoPosicion(int casillaActual){
 
 int efectoTiradas(int casillaActual, int numeroDeTiradas){
     if (esOca (casillaActual)){
-
+        return numeroDeTiradas + 1;
     }
-
-
 }
-
-
-
 
 int siguienteOca(int casilla){
     if (casilla % 9 == 0)
@@ -231,5 +226,7 @@ void square(){
     }
 
     cout << "\\\\-----------------------------//" << endl;
-
 }
+
+
+
