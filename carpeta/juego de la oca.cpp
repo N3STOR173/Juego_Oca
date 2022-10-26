@@ -33,7 +33,7 @@ int siguienteLaberinto();
 int siguienteMuerte();
 
 string center(int width, string s);
-void square(int casilla);
+int square(int casilla, string name);
 
 int main() {
     //defino la seed del número aleatorio
@@ -131,19 +131,19 @@ int primeraTirada (int casillaActual, bool MODO_DEBUG){
         cout << "* VALOR DEL DADO: " << dado << endl;
     }
 
-    cout << "* Pasas a la casilla: " << casillaActual + dado << endl;
-    square(casillaActual + dado);
+    square(casillaActual + dado, "Pasas a la casilla: ");
     return casillaActual + dado;
 }
 
 int turnoJugador (int turno, int casillaActual, int numeroDeTiradas){
-    cout << "\n\n(( TURNO PARA EL JUGADOR " << turno << " ))\n";
-    cout << "* CASILLA ACTUAL: " << casillaActual << endl;
-    square(casillaActual);
+    cout << "\n\n(( TURNO PARA EL JUGADOR " << turno << " ))\n" << endl;
+    square(casillaActual, "CASILLA:");
     if (numeroDeTiradas < 0)
-        cout << "-> Te quedan " << -numeroDeTiradas << " tiradas penalizadas\n";
+        cout << "* Te quedan " << -numeroDeTiradas << " tiradas penalizadas\n";
     else if (numeroDeTiradas == 0)
         cout << "* !Jugaras en el siguiente turno!\n";
+
+    return 0;
 }
 
 int continuar (int casillaActual){
@@ -181,40 +181,37 @@ int efectoPosicion(int casillaActual){
         return casillaActual;
 
     } else if (esOca(casillaActual)) {
-        cout << "* !De Oca en Oca y tiro porque me toca!\n";
-        cout << "* Pasas a la casilla: " << siguienteOca(casillaActual)<< endl;
-        square(siguienteOca(casillaActual));
+        cout << "* !De Oca en Oca y tiro porque me toca!\n" << endl;
+        square(siguienteOca(casillaActual), "Pasas a la casilla:");
         if (esMeta(casillaActual + 4)){
             cout << "\n-> Y vuelves a tirar...\n";
         }return siguienteOca(casillaActual);
     } else if (esPuente(casillaActual)) {
-        cout << "* !De puente a puente y tiro porque me lleva la corriente!\n";
-        cout << "* Pasas a la casilla: " << siguientePuente(casillaActual) << "\n-> Y vuelves a tirar...\n"<< endl;
-        square(siguientePuente(casillaActual));
+        cout << "* !De puente a puente y tiro porque me lleva la corriente!\n" << endl;
+        square(siguientePuente(casillaActual), "Pasas a la casilla:");
+        cout << "\n-> Y vuelves a tirar...\n" << endl;
         return siguientePuente(casillaActual);
     } else if (esDados(casillaActual)) {
-        cout << "* !De dados a dados y tiro porque me ha tocado!\n";
-        cout << "* Pasas a la casilla: " << siguienteDado(casillaActual) << "\n-> Y vuelves a tirar...\n"<< endl;
-        square(siguienteDado(casillaActual));
+        cout << "* !De dados a dados y tiro porque me ha tocado!\n" << endl;
+        square(siguienteDado(casillaActual), "Pasas a la casilla:");
+        cout << "\n-> Y vuelves a tirar...\n" << endl;
         return siguienteDado(casillaActual);
     } else if (esLaberinto(casillaActual)) {
-        cout << "* !Has caido en un laberinto! Retrocedes 12 casillas...\n";
-        cout << "* Pasas a la casilla: " << siguienteLaberinto() << "\n" << endl;
-        square(siguienteLaberinto());
+        cout << "* !Has caido en un laberinto! Retrocedes 12 casillas...\n" << endl;
+        square(siguienteLaberinto(), "Vuelves a la casilla:");
         return siguienteLaberinto();
     } else if (esMuerte(casillaActual)) {
-        cout << "* !Has caido en la muerte! Vuelves al principio...\n";
-        cout << "* Pasas a la casilla: " << siguienteMuerte() << "\n";
-        square(siguienteMuerte());
+        cout << "* !Has caido en la muerte! Vuelves al principio...\n" << endl;
+        square(siguienteMuerte(), "CASILLA:");
         return siguienteMuerte();
     } else if (esPosada(casillaActual)) {
-        cout << "* !Has caido en la posada! Pierdes un turno.\n";
+        cout << "* !Has caido en la posada! Pierdes un turno.\n" << endl;
         return casillaActual;
     } else if (esPrision(casillaActual)) {
-        cout << "* !Has caido en la prision! Pierdes dos turnos.\n";
+        cout << "* !Has caido en la prision! Pierdes dos turnos.\n" << endl;
         return casillaActual;
     } else if (esPozo(casillaActual)) {
-        cout << "* !Has caido en el pozo! Pierdes tres turnos.\n";
+        cout << "* !Has caido en el pozo! Pierdes tres turnos.\n" << endl;
         return casillaActual;
     } else
         return casillaActual;
@@ -383,17 +380,19 @@ string center(int width, string s){
     return out;
 }
 
-void square(int casilla){
+int square(int casilla, string name){
 
     string casillaActual = to_string(casilla);
 
     cout << "//-----------------------------\\\\" << endl;
 
     for(int i = 0; i<5; i++) {
-        if(i == 2) cout << left << "|" << center(31, casillaActual) << right << "|" << endl;
+        if(i==0) cout << left << "|" << center(31, name) << right << "|" << endl;
+        else if(i == 2) cout << left << "|" << center(31, casillaActual) << right << "|" << endl;
         else cout << left << "|" << setw(32) << right << "|" << endl;
     }
 
     cout << "\\\\-----------------------------//" << endl;
 
+    return 0;
 }
