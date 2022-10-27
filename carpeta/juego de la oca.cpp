@@ -150,7 +150,7 @@ int continuar (int casillaActual){
     string continuar;
 
     if (esMeta(casillaActual)){
-        cout << "-> Pulsa cualquier tecla para continuar...\n"; cin >> continuar;
+        cout << "-> Pulse cualquier tecla para continuar...\n"; cin >> continuar;
         return 0;
     }
     else
@@ -184,17 +184,17 @@ int efectoPosicion(int casillaActual){
         cout << "* !De Oca en Oca y tiro porque me toca!\n" << endl;
         square(siguienteOca(casillaActual), "Pasas a la casilla:");
         if (esMeta(casillaActual + 4)){
-            cout << "\n-> Y vuelves a tirar...\n";
+            cout << "\n* Y vuelves a tirar...\n";
         }return siguienteOca(casillaActual);
     } else if (esPuente(casillaActual)) {
         cout << "* !De puente a puente y tiro porque me lleva la corriente!\n" << endl;
         square(siguientePuente(casillaActual), "Pasas a la casilla:");
-        cout << "\n-> Y vuelves a tirar...\n" << endl;
+        cout << "\n* Y vuelves a tirar...\n" << endl;
         return siguientePuente(casillaActual);
     } else if (esDados(casillaActual)) {
         cout << "* !De dados a dados y tiro porque me ha tocado!\n" << endl;
         square(siguienteDado(casillaActual), "Pasas a la casilla:");
-        cout << "\n-> Y vuelves a tirar...\n" << endl;
+        cout << "\n* Y vuelves a tirar...\n" << endl;
         return siguienteDado(casillaActual);
     } else if (esLaberinto(casillaActual)) {
         cout << "* !Has caido en un laberinto! Retrocedes 12 casillas...\n" << endl;
@@ -367,7 +367,8 @@ string center(int width, string s){
 
     /* Calculamos la longitud de los espacios que debe haber a cada lado de la cadena
      * obteniendo primero la diferencia entre la longitud deseada y la de la propia cadena,
-     * y obteniendo la mitad, siendo el restante la diferencia entre el espacio izquierdo
+     * y obteniendo la mitad, siendo el restante la diferencia entre el espacio izquierdo y
+	 * la diferencia de longitudes.
      */
     int difference = width - length;
     int spL = difference/2;
